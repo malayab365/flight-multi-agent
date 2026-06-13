@@ -1,0 +1,17 @@
+# Core LangChain ecosystem
+langchain>=0.3.0
+langchain-core>=0.3.0
+langchain-anthropic>=0.3.0
+langgraph>=0.2.50
+
+# Observability / tracing
+langsmith>=0.1.140
+
+# Real flight-API stubs (uncomment what you use)
+amadeus>=11.0.0          # Amadeus Self-Service flight APIs
+# google-search-results  # SerpAPI (Google Flights) - alternative provider
+
+# HTTP + utilities
+requests>=2.32.0
+python-dotenv>=1.0.1
+pydantic>=2.7.0
