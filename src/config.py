@@ -19,9 +19,9 @@ load_dotenv()
 class Settings:
     """Typed view over the environment configuration."""
 
-    # --- LLM ---
-    anthropic_api_key: str = os.getenv("ANTHROPIC_API_KEY", "")
-    anthropic_model: str = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-6")
+    # --- LLM (OpenRouter) ---
+    openrouter_api_key: str = os.getenv("OPENROUTER_API_KEY", "")
+    openrouter_model: str = os.getenv("OPENROUTER_MODEL", "openai/gpt-4o")
 
     # --- LangSmith ---
     langsmith_tracing: bool = os.getenv("LANGSMITH_TRACING", "false").lower() == "true"
