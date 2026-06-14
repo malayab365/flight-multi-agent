@@ -26,3 +26,13 @@ htmlcov/
 
 # Claude Code local settings
 .claude/
+
+# Java / Maven
+target/
+*.class
+*.jar
+*.iml
+.mvn/
+
+# Runtime logs
+*.log
