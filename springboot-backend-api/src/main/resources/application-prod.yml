@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/flightdb}
+    driver-class-name: org.postgresql.Driver
+    username: ${DATABASE_USER:flightuser}
+    password: ${DATABASE_PASSWORD:}
+    hikari:
+      maximum-pool-size: ${DB_POOL_MAX:10}
+      minimum-idle: ${DB_POOL_MIN:2}
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: ${JPA_DDL_AUTO:validate}
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc.batch_size: 25
+        order_inserts: true
+        order_updates: true
+  h2:
+    console:
+      enabled: false
+
+server:
+  port: ${PORT:8000}
+  tomcat:
+    threads:
+      max: ${TOMCAT_MAX_THREADS:200}
+    connection-timeout: 20000
+
+logging:
+  level:
+    root: INFO
+    com.flightagent: ${LOG_LEVEL:INFO}
+    org.springframework.web: INFO
+    org.hibernate.SQL: WARN
