@@ -274,3 +274,15 @@ The test suite covers the tool layer only — no LLM calls, no network requests,
 **Infrastructure**
 - Run the FastAPI server behind a production ASGI server (Gunicorn + Uvicorn workers).
 - Set `LANGSMITH_TRACING=true` and a valid `LANGSMITH_API_KEY` to get full observability in production.
+
+## Instruction
+
+To run the project going forward:
+# Terminal 1 â API server
+cd backend && uvicorn src.api:app --reload --port 8000
+
+# Terminal 2 â Web UI
+cd frontend && npm run dev
+
+# Tests
+cd backend && python -m pytest tests/ -q
