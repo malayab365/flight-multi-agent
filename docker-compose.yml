@@ -29,7 +29,7 @@ services:
       DATABASE_PASSWORD: ${DATABASE_PASSWORD:-flightpass}
       JPA_DDL_AUTO: update
       OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
-      OPENROUTER_MODEL: ${OPENROUTER_MODEL:-anthropic/claude-opus-4-7}
+      OPENROUTER_MODEL: ${OPENROUTER_MODEL:-openrouter/auto}
       AMADEUS_CLIENT_ID: ${AMADEUS_CLIENT_ID:-}
       AMADEUS_CLIENT_SECRET: ${AMADEUS_CLIENT_SECRET:-}
       AMADEUS_HOSTNAME: ${AMADEUS_HOSTNAME:-test}
@@ -38,6 +38,19 @@ services:
       AGENT_RECURSION_LIMIT: ${AGENT_RECURSION_LIMIT:-25}
     ports:
       - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    depends_on:
+      backend:
+        condition: service_started
+    environment:
+      BACKEND_URL: http://backend:8000
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
 
 volumes:
   postgres-data:

@@ -21,7 +21,7 @@ class Settings:
 
     # --- LLM (OpenRouter) ---
     openrouter_api_key: str = os.getenv("OPENROUTER_API_KEY", "")
-    openrouter_model: str = os.getenv("OPENROUTER_MODEL", "openai/gpt-4o")
+    openrouter_model: str = os.getenv("OPENROUTER_MODEL", "openrouter/auto")
 
     # --- LangSmith ---
     langsmith_tracing: bool = os.getenv("LANGSMITH_TRACING", "false").lower() == "true"

@@ -316,9 +316,9 @@ Now open `.env` and fill in at minimum:
 # Required — your OpenRouter key
 OPENROUTER_API_KEY=sk-or-your-key-here
 
-# Optional — change the model (default is openai/gpt-4o)
+# Optional — change the model (default is openrouter/auto, OpenRouter's Auto Router)
 # Any model slug from https://openrouter.ai/models works here
-OPENROUTER_MODEL=openai/gpt-4o
+OPENROUTER_MODEL=openrouter/auto
 ```
 
 Everything else in `.env` is optional. The system runs end-to-end on sample data without any other keys.
@@ -443,7 +443,7 @@ Importing `src/config.py` (which happens automatically on every startup) sets th
 | Key | Required | Service | What it unlocks |
 |---|---|---|---|
 | `OPENROUTER_API_KEY` | **Yes** | [OpenRouter](https://openrouter.ai) | The LLM that powers all agents |
-| `OPENROUTER_MODEL` | No (default: `openai/gpt-4o`) | OpenRouter | Choose any model from openrouter.ai/models |
+| `OPENROUTER_MODEL` | No (default: `openrouter/auto`) | OpenRouter | `openrouter/auto` = Auto Router (picks the best model per query); override with any slug from openrouter.ai/models |
 | `LANGSMITH_API_KEY` | No | [LangSmith](https://smith.langchain.com) | Full distributed tracing dashboard |
 | `AMADEUS_CLIENT_ID` / `AMADEUS_CLIENT_SECRET` | No | [Amadeus Self-Service](https://developers.amadeus.com) | Live flight search and booking |
 | `OPENWEATHER_API_KEY` | No | [OpenWeatherMap](https://openweathermap.org/api) | Real-time weather data |

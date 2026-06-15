@@ -74,7 +74,7 @@ spring:
       api-key: ${OPENROUTER_API_KEY}
       base-url: https://openrouter.ai/api/v1
       chat.options:
-        model: ${OPENROUTER_MODEL:openai/gpt-4o}
+        model: ${OPENROUTER_MODEL:openrouter/auto}
         temperature: 0.0
         max-tokens: 2048
   datasource:

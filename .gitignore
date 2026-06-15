@@ -36,3 +36,8 @@ target/
 
 # Runtime logs
 *.log
+
+# switch-backend.sh / switch-backend-docker.sh state
+.backend.pid
+.backend.mode
+.backend-docker.mode

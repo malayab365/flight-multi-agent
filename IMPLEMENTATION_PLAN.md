@@ -2,7 +2,7 @@
 
 **Stack**: Java 21 · Spring Boot 3.5.0 · Spring AI 1.0.0 · H2 (dev) / PostgreSQL (prod)  
 **Folder**: `springboot-backend-api/` (Python backend untouched)  
-**Model**: `anthropic/claude-opus-4-7` via OpenRouter  
+**Model**: `openrouter/auto` (OpenRouter Auto Router — picks the best model per query)  
 **Pattern**: Implement → verify (`mvn test` / smoke test) → seek approval → next phase
 
 ---
@@ -75,7 +75,7 @@ Files to create:
 
 ---
 
-## Phase 5 — Agent Orchestration ⬜
+## Phase 5 — Agent Orchestration ✅
 **Goal**: Supervisor multi-agent loop + 5 ReAct specialist agents.
 
 Files to create:
@@ -96,7 +96,7 @@ Files to create:
 
 ---
 
-## Phase 6 — Hardening ⬜
+## Phase 6 — Hardening ✅
 **Goal**: Production-readiness, error handling, Docker Compose.
 
 Tasks:
