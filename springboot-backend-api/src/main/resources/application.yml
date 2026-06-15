@@ -8,7 +8,7 @@ spring:
       base-url: https://openrouter.ai/api
       chat:
         options:
-          model: ${OPENROUTER_MODEL:anthropic/claude-opus-4-7}
+          model: ${OPENROUTER_MODEL:openrouter/auto}
           temperature: 0.0
           max-tokens: 2048
 

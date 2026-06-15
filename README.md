@@ -113,7 +113,31 @@ flight_multi_agent/
 
 ## Quick Start
 
-Both the backend and frontend must run simultaneously. Open two terminal tabs.
+You can run either the Python backend (`backend/`) or the Java Spring Boot backend
+(`springboot-backend-api/`). Both expose the same 15 REST endpoints, so the Next.js
+frontend works against either one with zero changes.
+
+### Option A — Docker Compose (full stack: PostgreSQL + Java backend + Next.js)
+
+```bash
+# From the repo root
+cp backend/.env.example .env    # or create a .env with your OPENROUTER_API_KEY
+docker compose up --build
+```
+
+Once the containers are healthy:
+
+| Service     | URL                       |
+|-------------|---------------------------|
+| Frontend    | http://localhost:3000     |
+| Java API    | http://localhost:8000/api |
+| PostgreSQL  | localhost:5432 (flightdb) |
+
+`docker compose down -v` tears everything down and wipes the database volume.
+
+### Option B — Manual (pick a backend, plus the frontend)
+
+Open two terminal tabs.
 
 ### 1 — Backend (Python / FastAPI)
 
@@ -144,6 +168,28 @@ uvicorn src.api:app --reload --port 8000
 ```
 
 The API will be available at `http://localhost:8000`.
+
+### 1b — Backend (Java / Spring Boot, alternative)
+
+A drop-in Java replacement for the Python backend lives in `springboot-backend-api/`.
+It exposes the same 15 endpoints (Spring AI 1.0 + OpenRouter, Hibernate/JPA + H2 in
+dev, PostgreSQL in prod). Requires Java 21 and Maven.
+
+```bash
+cd springboot-backend-api
+
+# Set keys (same names as the Python backend)
+export OPENROUTER_API_KEY=sk-or-your-key-here
+
+# Run on :8000
+mvn spring-boot:run
+```
+
+Run tests (no LLM, no network, no keys needed):
+
+```bash
+mvn test
+```
 
 ### 2 — Frontend (Next.js)
 
@@ -178,7 +224,7 @@ All variables are read from `backend/.env`. Copy `backend/.env.example` to get s
 | Variable | Required | Description |
 |---|---|---|
 | `OPENROUTER_API_KEY` | **Yes** | API key from [openrouter.ai](https://openrouter.ai) — powers all AI agents |
-| `OPENROUTER_MODEL` | No (default: `openai/gpt-4o`) | Any model slug from openrouter.ai/models |
+| `OPENROUTER_MODEL` | No (default: `openrouter/auto`) | `openrouter/auto` enables OpenRouter's Auto Router (best model picked per query). Override with any slug from openrouter.ai/models |
 | `LANGSMITH_API_KEY` | No | Enables distributed tracing in [LangSmith](https://smith.langchain.com) |
 | `LANGSMITH_TRACING` | No | Set to `true` to activate tracing |
 | `LANGSMITH_PROJECT` | No | Project name in LangSmith dashboard |
@@ -286,3 +332,12 @@ cd frontend && npm run dev
 
 # Tests
 cd backend && python -m pytest tests/ -q
+
+
+# docker backend switch
+./switch-backend-docker.sh spring   # bring up Spring Boot backend in compose
+./switch-backend-docker.sh python   # swap to Python FastAPI (uses override file)
+./switch-backend-docker.sh status   # ps + :8000 health check
+./switch-backend-docker.sh stop     # stop backend, keep postgres/frontend
+./switch-backend-docker.sh down     # tear down full stack
+

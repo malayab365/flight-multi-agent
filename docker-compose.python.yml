@@ -1,0 +1,8 @@
+# Override file — swaps the `backend` service for the Python FastAPI build.
+# Apply with:
+#   docker compose -f docker-compose.yml -f docker-compose.python.yml up -d
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
